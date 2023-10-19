@@ -5,6 +5,7 @@ using UnityEngine;
 [Serializable]
 public class FrameData
 {
-    public List<Transform> transforms = new();
     public List<bool> isChild = new();
+    public List<Vector3> positions = new();
+    public List<Quaternion> rotations = new();
 }

@@ -5,7 +5,7 @@ public class FrameManager : MonoBehaviour
 {
     private int frameIndex = 0;
 
-    [SerializeField] private int amountOfFrames = 3;
+    public int amountOfFrames = 0;
 
     public event Action<int> OnGoToFrame;
 
@@ -13,7 +13,9 @@ public class FrameManager : MonoBehaviour
 
     public void NextFrame()
     {
-        if (frameIndex >= amountOfFrames || frameIndex >= amountOfAvailableFrames) { return; }
+        if (frameIndex >= amountOfFrames - 1 || frameIndex >= amountOfAvailableFrames - 1) { return; }
+
+        Debug.Log(frameIndex);
 
         frameIndex++;
         OnGoToFrame?.Invoke(frameIndex);
