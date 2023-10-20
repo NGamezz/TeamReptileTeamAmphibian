@@ -7,11 +7,11 @@ public class ObjectFrameHandler : MonoBehaviour
 
     private readonly List<Transform> currentTransforms = new();
 
-    private FrameManager frameManager => FindObjectOfType<FrameManager>();
+    private FrameManager FrameManager => FindObjectOfType<FrameManager>();
 
     private void Awake()
     {
-        frameManager.OnGoToFrame += GoToFrameIndex;
+        FrameManager.OnGoToFrame += GoToFrameIndex;
     }
 
     private void Start()
@@ -76,8 +76,12 @@ public class ObjectFrameHandler : MonoBehaviour
             }
         }
 
-        frameManager.amountOfFrames++;
         frames.Add(frameData);
+
+        if (FrameManager.amountOfFrames < frames.Count)
+        {
+            FrameManager.amountOfFrames++;
+        }
     }
 
     private void ApplyPositions(int index)
