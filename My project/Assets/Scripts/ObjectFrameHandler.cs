@@ -9,15 +9,25 @@ public class ObjectFrameHandler : MonoBehaviour
 
     private FrameManager FrameManager => FindObjectOfType<FrameManager>();
 
-    private void Awake()
+    private void OnEnable()
     {
         FrameManager.OnGoToFrame += GoToFrameIndex;
+    }
+
+    private void OnDisable()
+    {
+        FrameManager.OnGoToFrame -= GoToFrameIndex;
     }
 
     private void Start()
     {
         AddTransformsToList();
         GoToFrameIndex(0);
+
+        if (FrameManager.amountOfFrames < frames.Count)
+        {
+            FrameManager.amountOfFrames = frames.Count;
+        }
     }
 
     private void AddTransformsToList()

@@ -15,8 +15,6 @@ public class FrameManager : MonoBehaviour
     {
         if (frameIndex >= amountOfFrames - 1 || frameIndex >= amountOfAvailableFrames - 1) { return; }
 
-        Debug.Log(frameIndex);
-
         frameIndex++;
         OnGoToFrame?.Invoke(frameIndex);
     }
