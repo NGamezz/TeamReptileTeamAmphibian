@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1023744298149948835}
   - component: {fileID: 501322317670528612}
+  - component: {fileID: 17016044768840548}
   m_Layer: 0
   m_Name: CameraHolder
   m_TagString: Untagged
@@ -46,11 +47,63 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anchor: {fileID: 0}
+  defaultAnchor: {fileID: 0}
+  cameraTransform: {fileID: 8644305492472545159}
   mouseSens: 1.5
-  cameraTransform: {fileID: 0}
-  anchorLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
+  zoomSpeed: 2
+  maxFov: 120
+  minFovToDeselectRoom: 95
+  minFov: 30
+  roomSelectedFov: 45
+  anchorLayerMask: 6
+--- !u!114 &17016044768840548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4349167717543910467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48683236dc5c2774fb02343f606d34bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  KeyPressed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 501322317670528612}
+        m_TargetAssemblyTypeName: CameraMovement, Assembly-CSharp
+        m_MethodName: CheckForCursorClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  KeyPressedAgain:
+    m_PersistentCalls:
+      m_Calls: []
+  actionToActivate:
+    m_Name: Action To Activate
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 975263d6-37c1-4556-9ae8-0c830ed9200b
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 94239f83-ebcb-4ed2-96fd-aca483705403
+      m_Path: <Mouse>/leftButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Action To Activate
+      m_Flags: 0
+    m_Flags: 0
+  performDifferentActionWhenPressedBefore: 0
 --- !u!1 &4663905926674307643
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,7 +172,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 6.74
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

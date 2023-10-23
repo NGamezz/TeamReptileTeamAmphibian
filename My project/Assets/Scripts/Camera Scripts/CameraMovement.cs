@@ -12,16 +12,20 @@ public class CameraMovement : MonoBehaviour
     [Tooltip("Multiplicative"), Range(1, 6)]
     [SerializeField] private float zoomSpeed = 0.5f;
 
+    //Might be usefull later, not sure yet.
     private float defaultFov;
 
-    [Tooltip("Try not too make it too high"), Range(60, 105)]
+    [Tooltip("Try not too make it too high"), Range(60, 120)]
     [SerializeField] private float maxFov = 15.0f;
 
-    [Tooltip("At which point the room will be deselected when zooming out.")]
+    [Tooltip("At which point the room will be deselected when zooming out."), Range(70, 120)]
     [SerializeField] private float minFovToDeselectRoom = 70.0f;
 
     [Range(30, 60)]
     [SerializeField] private float minFov = 15.0f;
+
+    [Tooltip("The fov it will use when you select a room"), Range(30, 60)]
+    [SerializeField] private float roomSelectedFov = 40.0f;
 
     private float xRotation;
     private float yRotation;
@@ -30,21 +34,23 @@ public class CameraMovement : MonoBehaviour
 
     private Camera camera;
     private IRoom currentRoom;
+
     private void Start()
     {
         camera = Camera.main;
         defaultFov = camera.fieldOfView;
-        transform.position = defaultAnchor.transform.position;
+
+        SetAnchor(defaultAnchor);
     }
 
-    public void SetAnchor(GameObject gameObject, GameObject gameObject2, bool whichOne)
+    private void SetAnchor(GameObject gameObject, GameObject gameObject2 = null, bool whichOne = true)
     {
         anchor = whichOne ? gameObject : gameObject2;
+        transform.position = anchor.transform.position;
     }
 
     private void Update()
     {
-        CheckForCursorClick();
         HandleCameraRotation();
         ZoomHandling();
     }
@@ -59,6 +65,9 @@ public class CameraMovement : MonoBehaviour
 
         if (camera.fieldOfView >= minFovToDeselectRoom)
         {
+            SetAnchor(defaultAnchor);
+
+            if (currentRoom == null) { return; }
             currentRoom.OnRoomDeselection();
             currentRoom = null;
         }
@@ -87,6 +96,7 @@ public class CameraMovement : MonoBehaviour
         yRotation += mouseX;
 
         xRotation = Mathf.Clamp(xRotation, -90, 90);
+        yRotation = Mathf.Clamp(yRotation, -90, 90);
 
         transform.SetPositionAndRotation(anchor.transform.position, Quaternion.Euler(xRotation, yRotation, 0));
     }
@@ -105,14 +115,14 @@ public class CameraMovement : MonoBehaviour
             }
             currentRoom = isAlreadySelected ? null : room;
         }
-        else
+        else if (currentRoom != null)
         {
             currentRoom.OnRoomDeselection();
             currentRoom = null;
         }
     }
 
-    private void CheckForCursorClick()
+    public void CheckForCursorClick()
     {
         if (!Input.GetMouseButtonDown(0)) { return; }
 
@@ -124,9 +134,8 @@ public class CameraMovement : MonoBehaviour
 
             CheckForRoom(hit, hit.transform.gameObject == anchor);
 
+            camera.fieldOfView = roomSelectedFov;
             SetAnchor(defaultAnchor, hit.transform.gameObject, hit.transform.gameObject == anchor);
-
-            transform.position = anchor.transform.position;
         }
     }
 }
