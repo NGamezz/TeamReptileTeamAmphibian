@@ -1149,7 +1149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47996f1a658d45b4bab727394f7b97d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountOfFrames: 7
+  amountOfFrames: 9
   amountOfAvailableFrames: 3
 --- !u!4 &1505500271
 Transform:
@@ -1646,6 +1646,28 @@ MonoBehaviour:
     - {x: 0, y: -0.07689308, z: 0, w: 0.9970393}
     - {x: 0, y: 0, z: 0, w: 1}
     - {x: 0.30810383, y: 0, z: 0, w: 0.9513528}
+  - isChild: 00010101
+    positions:
+    - {x: 1.0063189, y: 0, z: -2.101574}
+    - {x: 0.64, y: 0, z: 0}
+    - {x: 0.28, y: 0, z: -0.55}
+    - {x: -0.7, y: 0, z: 0}
+    rotations:
+    - {x: -0, y: 0.98375607, z: -0, w: 0.1795107}
+    - {x: 0, y: -0.07689308, z: 0, w: 0.9970393}
+    - {x: 0, y: 0, z: 0, w: 1}
+    - {x: 0.30810383, y: 0, z: 0, w: 0.9513528}
+  - isChild: 00010101
+    positions:
+    - {x: 1.0063189, y: 0, z: -2.101574}
+    - {x: 0.64, y: 0, z: 0}
+    - {x: 0.28, y: 0, z: -0.55}
+    - {x: -0.7, y: 0, z: 0}
+    rotations:
+    - {x: -0, y: 0.98375607, z: -0, w: 0.1795107}
+    - {x: 0, y: -0.07689308, z: 0, w: 0.9970393}
+    - {x: 0, y: 0, z: 0, w: 1}
+    - {x: 0.30810383, y: 0, z: 0, w: 0.9513528}
 --- !u!136 &1714884651
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2095,6 +2117,26 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 501322317670528612, guid: a90c3051958324a469f8ce1c108cef77, type: 3}
       propertyPath: anchor
+      value: 
+      objectReference: {fileID: 1061156901}
+    - target: {fileID: 501322317670528612, guid: a90c3051958324a469f8ce1c108cef77, type: 3}
+      propertyPath: maxFov
+      value: 105
+      objectReference: {fileID: 0}
+    - target: {fileID: 501322317670528612, guid: a90c3051958324a469f8ce1c108cef77, type: 3}
+      propertyPath: minFov
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 501322317670528612, guid: a90c3051958324a469f8ce1c108cef77, type: 3}
+      propertyPath: maxZoom
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 501322317670528612, guid: a90c3051958324a469f8ce1c108cef77, type: 3}
+      propertyPath: zoomSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 501322317670528612, guid: a90c3051958324a469f8ce1c108cef77, type: 3}
+      propertyPath: defaultAnchor
       value: 
       objectReference: {fileID: 1061156901}
     - target: {fileID: 501322317670528612, guid: a90c3051958324a469f8ce1c108cef77, type: 3}

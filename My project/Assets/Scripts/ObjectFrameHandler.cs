@@ -16,6 +16,7 @@ public class ObjectFrameHandler : MonoBehaviour
 
     private void OnDisable()
     {
+        if (FrameManager == null) { return; }
         FrameManager.OnGoToFrame -= GoToFrameIndex;
     }
 
