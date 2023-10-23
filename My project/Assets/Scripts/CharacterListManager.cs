@@ -8,6 +8,9 @@ public class FacePlate
 {
 }
 
+/// <summary>
+/// Still gotta make that.
+/// </summary>
 public class CharacterListManager : MonoBehaviour
 {
     [SerializeField] private List<Character> characters = new List<Character>();

@@ -7,13 +7,15 @@ public class FrameManager : MonoBehaviour
 
     public int amountOfFrames = 0;
 
+    private bool gamePaused = false;
+
     public event Action<int> OnGoToFrame;
 
     [SerializeField] private int amountOfAvailableFrames = 3;
 
     public void NextFrame()
     {
-        if (frameIndex >= amountOfFrames - 1 || frameIndex >= amountOfAvailableFrames - 1) { return; }
+        if (frameIndex >= amountOfFrames - 1 || frameIndex >= amountOfAvailableFrames - 1 || gamePaused) { return; }
 
         frameIndex++;
         OnGoToFrame?.Invoke(frameIndex);
@@ -21,19 +23,25 @@ public class FrameManager : MonoBehaviour
 
     public void PreviousFrame()
     {
-        if (frameIndex <= 0) { return; }
+        if (frameIndex <= 0 || gamePaused) { return; }
 
         frameIndex--;
         OnGoToFrame?.Invoke(frameIndex);
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        OnGoToFrame?.Invoke(frameIndex);
+        EventManager.AddListener(EventType.Pause, () => gamePaused = true);
+        EventManager.AddListener(EventType.UnPause, () => gamePaused = false);
     }
 
     private void OnDisable()
     {
         OnGoToFrame = null;
+    }
+
+    private void Start()
+    {
+        OnGoToFrame?.Invoke(frameIndex);
     }
 }

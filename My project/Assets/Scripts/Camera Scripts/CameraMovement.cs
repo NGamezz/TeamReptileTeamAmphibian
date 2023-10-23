@@ -35,6 +35,14 @@ public class CameraMovement : MonoBehaviour
     private Camera camera;
     private IRoom currentRoom;
 
+    private bool gamePaused = false;
+
+    private void OnEnable()
+    {
+        EventManager.AddListener(EventType.Pause, () => gamePaused = true);
+        EventManager.AddListener(EventType.UnPause, () => gamePaused = false);
+    }
+
     private void Start()
     {
         camera = Camera.main;
@@ -51,6 +59,7 @@ public class CameraMovement : MonoBehaviour
 
     private void Update()
     {
+        if (gamePaused) { return; }
         HandleCameraRotation();
         ZoomHandling();
     }
@@ -124,7 +133,7 @@ public class CameraMovement : MonoBehaviour
 
     public void CheckForCursorClick()
     {
-        if (!Input.GetMouseButtonDown(0)) { return; }
+        if (!Input.GetMouseButtonDown(0) || gamePaused) { return; }
 
         var Ray = camera.ScreenPointToRay(Input.mousePosition);
 
