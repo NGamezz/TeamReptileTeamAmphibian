@@ -27,6 +27,11 @@ public class FrameManager : MonoBehaviour
         OnGoToFrame?.Invoke(frameIndex);
     }
 
+    private void Start()
+    {
+        OnGoToFrame?.Invoke(frameIndex);
+    }
+
     private void OnDisable()
     {
         OnGoToFrame = null;

@@ -17,6 +17,9 @@ public class CameraMovement : MonoBehaviour
     [Tooltip("Try not too make it too high"), Range(60, 105)]
     [SerializeField] private float maxFov = 15.0f;
 
+    [Tooltip("At which point the room will be deselected when zooming out.")]
+    [SerializeField] private float minFovToDeselectRoom = 70.0f;
+
     [Range(30, 60)]
     [SerializeField] private float minFov = 15.0f;
 
@@ -26,7 +29,7 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private int anchorLayerMask = 6;
 
     private Camera camera;
-
+    private IRoom currentRoom;
     private void Start()
     {
         camera = Camera.main;
@@ -34,9 +37,9 @@ public class CameraMovement : MonoBehaviour
         transform.position = defaultAnchor.transform.position;
     }
 
-    public void SetAnchor(GameObject gameObject)
+    public void SetAnchor(GameObject gameObject, GameObject gameObject2, bool whichOne)
     {
-        anchor = gameObject;
+        anchor = whichOne ? gameObject : gameObject2;
     }
 
     private void Update()
@@ -52,6 +55,12 @@ public class CameraMovement : MonoBehaviour
         if (camera.fieldOfView < maxFov && Input.mouseScrollDelta.y < 0 || camera.fieldOfView > minFov && Input.mouseScrollDelta.y > 0)
         {
             camera.fieldOfView += -Input.mouseScrollDelta.y * zoomSpeed;
+        }
+
+        if (camera.fieldOfView >= minFovToDeselectRoom)
+        {
+            currentRoom.OnRoomDeselection();
+            currentRoom = null;
         }
     }
 
@@ -82,6 +91,27 @@ public class CameraMovement : MonoBehaviour
         transform.SetPositionAndRotation(anchor.transform.position, Quaternion.Euler(xRotation, yRotation, 0));
     }
 
+    private void CheckForRoom(RaycastHit hit, bool isAlreadySelected)
+    {
+        if (hit.transform.TryGetComponent(out IRoom room))
+        {
+            if (isAlreadySelected)
+            {
+                room.OnRoomDeselection();
+            }
+            else
+            {
+                room.OnRoomSelection();
+            }
+            currentRoom = isAlreadySelected ? null : room;
+        }
+        else
+        {
+            currentRoom.OnRoomDeselection();
+            currentRoom = null;
+        }
+    }
+
     private void CheckForCursorClick()
     {
         if (!Input.GetMouseButtonDown(0)) { return; }
@@ -92,14 +122,9 @@ public class CameraMovement : MonoBehaviour
         {
             if (hit.transform.gameObject.layer != anchorLayerMask) { return; }
 
-            if (hit.transform.gameObject == anchor)
-            {
-                SetAnchor(defaultAnchor);
-            }
-            else
-            {
-                SetAnchor(hit.transform.gameObject);
-            }
+            CheckForRoom(hit, hit.transform.gameObject == anchor);
+
+            SetAnchor(defaultAnchor, hit.transform.gameObject, hit.transform.gameObject == anchor);
 
             transform.position = anchor.transform.position;
         }

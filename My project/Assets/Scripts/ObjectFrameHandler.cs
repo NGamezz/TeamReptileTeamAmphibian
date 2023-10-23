@@ -23,7 +23,6 @@ public class ObjectFrameHandler : MonoBehaviour
     private void Start()
     {
         AddTransformsToList();
-        GoToFrameIndex(0);
 
         if (FrameManager.amountOfFrames < frames.Count)
         {
