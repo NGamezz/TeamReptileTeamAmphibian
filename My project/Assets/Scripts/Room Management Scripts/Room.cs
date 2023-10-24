@@ -25,6 +25,7 @@ public class Room : MonoBehaviour, IRoom
     private void Start()
     {
         frameManager.OnGoToFrame += SelectDialogueIndex;
+        SelectDialogueIndex(0);
     }
 
     private void OnDisable()

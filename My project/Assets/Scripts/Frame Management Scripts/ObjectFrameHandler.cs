@@ -5,28 +5,27 @@ public class ObjectFrameHandler : MonoBehaviour
 {
     [SerializeField] private List<FrameData> frames = new();
 
-    private readonly List<Transform> currentTransforms = new();
+    [SerializeField] private List<Transform> currentTransforms = new();
 
-    private FrameManager FrameManager => FindObjectOfType<FrameManager>();
-
-    private void OnEnable()
-    {
-        FrameManager.OnGoToFrame += GoToFrameIndex;
-    }
+    private FrameManager frameManager;
 
     private void OnDisable()
     {
-        if (FrameManager == null) { return; }
-        FrameManager.OnGoToFrame -= GoToFrameIndex;
+        if (frameManager == null) { return; }
+        frameManager.OnGoToFrame -= GoToFrameIndex;
     }
 
     private void Start()
     {
+        currentTransforms.Clear();
+        frameManager = FindObjectOfType<FrameManager>();
+        frameManager.OnGoToFrame += GoToFrameIndex;
+
         AddTransformsToList();
 
-        if (FrameManager.amountOfFrames < frames.Count)
+        if (frameManager.AmountOfFrames < frames.Count)
         {
-            FrameManager.amountOfFrames = frames.Count;
+            frameManager.SetAmountOfFrames(frames.Count);
         }
     }
 
@@ -37,7 +36,7 @@ public class ObjectFrameHandler : MonoBehaviour
             currentTransforms.Add(transform);
         }
 
-        Transform[] childrenTransforms = transform.GetComponentsInChildren<Transform>();
+        Transform[] childrenTransforms = transform.GetComponentsInChildren<Transform>(true);
         foreach (Transform transform in childrenTransforms)
         {
             if (currentTransforms.Contains(transform)) { continue; }
@@ -70,6 +69,8 @@ public class ObjectFrameHandler : MonoBehaviour
             }
         }
 
+        Debug.Log(string.Join(",", currentTransforms));
+
         for (int i = 0; i < currentTransforms.Count; i++)
         {
             if (currentTransforms[i] == null) { continue; }
@@ -84,21 +85,20 @@ public class ObjectFrameHandler : MonoBehaviour
                 frameData.positions.Add(currentTransforms[i].position);
                 frameData.rotations.Add(currentTransforms[i].rotation);
             }
+
+            frameData.setActive.Add(currentTransforms[i].gameObject.activeInHierarchy);
         }
 
         frames.Add(frameData);
-
-        if (FrameManager.amountOfFrames < frames.Count)
-        {
-            FrameManager.amountOfFrames++;
-        }
     }
 
     private void ApplyPositions(int index)
     {
+        if (frames.Count <= index) { return; }
+
         for (int i = 0; i < currentTransforms.Count; i++)
         {
-            if (frames[index].positions[i] == null) { continue; }
+            if (frames[index].positions.Count <= i) { continue; }
 
             if (frames[index].isChild[i])
             {
@@ -108,6 +108,8 @@ public class ObjectFrameHandler : MonoBehaviour
             {
                 currentTransforms[i].SetPositionAndRotation(frames[index].positions[i], frames[index].rotations[i]);
             }
+
+            currentTransforms[i].gameObject.SetActive(frames[index].setActive[i]);
         }
     }
 }

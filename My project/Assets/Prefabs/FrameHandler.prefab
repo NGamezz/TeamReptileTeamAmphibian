@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7762688619991563167}
   - component: {fileID: 8173379557583543419}
-  - component: {fileID: 526996551944342372}
-  - component: {fileID: 8711391153547434106}
+  - component: {fileID: 7598724479255142842}
+  - component: {fileID: 9180838735872675990}
   m_Layer: 0
   m_Name: FrameHandler
   m_TagString: Untagged
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountOfFrames: 9
   amountOfAvailableFrames: 3
---- !u!114 &526996551944342372
+--- !u!114 &7598724479255142842
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,7 +57,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4889298190637895630}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48683236dc5c2774fb02343f606d34bf, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ec5307b5d8a12844aa7d430ea6c8300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   KeyPressed:
@@ -82,37 +82,21 @@ MonoBehaviour:
     m_Name: Action To Activate
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: d168aa0e-57c0-454c-a04d-af3356f021fe
+    m_Id: 87281c71-3f00-4e52-9e69-f0a970145c04
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: 
-      m_Id: a9524536-e47f-4abb-ad94-4e5cf4f0d5da
-      m_Path: <Keyboard>/a
+      m_Id: 3534503f-2248-4469-a9ea-49219f942980
+      m_Path: <Keyboard>/rightArrow
       m_Interactions: 
       m_Processors: 
       m_Groups: 
       m_Action: Action To Activate
       m_Flags: 0
     - m_Name: 
-      m_Id: 967fb3ff-d591-45b5-b771-af2e728339db
-      m_Path: <Keyboard>/leftArrow
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Action To Activate
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 9e7fd53f-c8eb-4b6f-a21f-55f208d5ffe0
-      m_Path: <Gamepad>/leftStick/left
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Action To Activate
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 09af37ab-dae0-4434-b1af-dafacf65d89b
-      m_Path: <Gamepad>/dpad/left
+      m_Id: 8cf56410-b67e-4c09-9597-73ffab29ee6d
+      m_Path: <Keyboard>/d
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -120,7 +104,8 @@ MonoBehaviour:
       m_Flags: 0
     m_Flags: 0
   performDifferentActionWhenPressedBefore: 0
---- !u!114 &8711391153547434106
+  affectedByPauze: 1
+--- !u!114 &9180838735872675990
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,7 +114,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4889298190637895630}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48683236dc5c2774fb02343f606d34bf, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ec5307b5d8a12844aa7d430ea6c8300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   KeyPressed:
@@ -154,37 +139,21 @@ MonoBehaviour:
     m_Name: Action To Activate
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: fad8cace-3bc7-42cc-8e1d-aae371f9d83b
+    m_Id: 87281c71-3f00-4e52-9e69-f0a970145c04
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: 
-      m_Id: 287c7ddc-1f62-4718-b5c2-be55c92db483
-      m_Path: <Keyboard>/d
+      m_Id: b288c336-f75e-4326-a916-f9cdce00c1f8
+      m_Path: <Keyboard>/a
       m_Interactions: 
       m_Processors: 
       m_Groups: 
       m_Action: Action To Activate
       m_Flags: 0
     - m_Name: 
-      m_Id: 9a9df73e-fd2c-435c-ae58-bb2be6385e16
-      m_Path: <Keyboard>/rightArrow
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Action To Activate
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 7978e5ca-fa7b-436e-9b93-18804dcacd8a
-      m_Path: <Gamepad>/dpad/right
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Action To Activate
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 3154399c-3f86-4f2c-832f-9b6d606aae49
-      m_Path: <Gamepad>/leftStick/right
+      m_Id: f836c27d-6422-4030-80db-3a4c297d0d79
+      m_Path: <Keyboard>/leftArrow
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -192,3 +161,4 @@ MonoBehaviour:
       m_Flags: 0
     m_Flags: 0
   performDifferentActionWhenPressedBefore: 0
+  affectedByPauze: 1

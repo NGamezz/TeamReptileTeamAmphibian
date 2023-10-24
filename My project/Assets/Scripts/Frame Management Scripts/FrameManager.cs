@@ -1,11 +1,12 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FrameManager : MonoBehaviour
 {
     private int frameIndex = 0;
 
-    public int amountOfFrames = 0;
+    public int AmountOfFrames { get; private set; } = 0;
 
     private bool gamePaused = false;
 
@@ -13,9 +14,17 @@ public class FrameManager : MonoBehaviour
 
     [SerializeField] private int amountOfAvailableFrames = 3;
 
+    public void SetAmountOfFrames(int value)
+    {
+        if (value > 0)
+        {
+            AmountOfFrames = value;
+        }
+    }
+
     public void NextFrame()
     {
-        if (frameIndex >= amountOfFrames - 1 || frameIndex >= amountOfAvailableFrames - 1 || gamePaused) { return; }
+        if (frameIndex >= AmountOfFrames - 1 || frameIndex >= amountOfAvailableFrames - 1 || gamePaused) { return; }
 
         frameIndex++;
         OnGoToFrame?.Invoke(frameIndex);
@@ -42,6 +51,6 @@ public class FrameManager : MonoBehaviour
 
     private void Start()
     {
-        OnGoToFrame?.Invoke(frameIndex);
+        OnGoToFrame?.Invoke(0);
     }
 }

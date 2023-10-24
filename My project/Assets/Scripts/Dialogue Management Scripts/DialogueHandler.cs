@@ -13,6 +13,8 @@ public class DialogueHandler : MonoBehaviour
 {
     public static DialogueHandler Instance { get; private set; }
 
+    [SerializeField] private bool typeWriterEffect = false;
+
     [SerializeField] private TMP_Text dialogueText;
 
     [Tooltip("The amount of delay between each character, in seconds.")]
@@ -24,6 +26,12 @@ public class DialogueHandler : MonoBehaviour
 
     public void PlayDialogue(Dialogue dialogueToPlay)
     {
+        if (!typeWriterEffect)
+        {
+            dialogueText.text = dialogueToPlay.Text;
+            return;
+        }
+
         if (displayLineCoroutine != null)
         {
             StopCoroutine(displayLineCoroutine);
